@@ -38,6 +38,9 @@ if on_ac_power; then
 	echo 0 > /sys/module/snd_hda_intel/parameters/power_save_controller
 	echo 0 > /sys/module/snd_hda_intel/parameters/power_save
 
+	# Restore screen brightness.
+	echo 14 > /sys/class/backlight/acpi_video0/brightness
+
 else
 	echo `date` "Switching to battery settings" >> /var/log/power.log
 
@@ -73,6 +76,9 @@ else
 	# (sounds shorter than 5 seconds will not be played)
 	echo 5 > /sys/module/snd_hda_intel/parameters/power_save
 	echo 1 > /sys/module/snd_hda_intel/parameters/power_save_controller
+
+	# Dim the screen.
+	echo 10 > /sys/class/backlight/acpi_video0/brightness
 
 fi
 
