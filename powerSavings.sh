@@ -6,8 +6,8 @@
 if [[ $1 == false ]]; then
 	echo `date` "Switching to AC settings" >> /var/log/power.log
 
-# Disable laptop mode
-#echo 0 > /proc/sys/vm/laptop_mode
+	# Disable laptop mode
+	#echo 0 > /proc/sys/vm/laptop_mode
 
 	# NMI watchdog should be turned on
 	for foo in /proc/sys/kernel/nmi_watchdog;
