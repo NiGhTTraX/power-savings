@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 # When we switch to battery, toggle some power savings on. When we go back to
 # AC power, switch them off.
 
-if on_ac_power; then
+if [[ $1 == false ]]; then
 	echo `date` "Switching to AC settings" >> /var/log/power.log
 
 # Disable laptop mode
@@ -41,7 +41,7 @@ if on_ac_power; then
 	# Restore screen brightness.
 	echo 14 > /sys/class/backlight/acpi_video0/brightness
 
-else
+elif [[ $1 == true ]]; then
 	echo `date` "Switching to battery settings" >> /var/log/power.log
 
 	# Enable Laptop-Mode disk writing
