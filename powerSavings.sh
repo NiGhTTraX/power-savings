@@ -3,6 +3,10 @@
 # When we switch to battery, toggle some power savings on. When we go back to
 # AC power, switch them off.
 
+BRIGHTNESS_ON_AC=14
+BRIGHTNESS_ON_BATT=10
+
+
 if [[ $1 == false ]]; then
 	echo `date` "Switching to AC settings" >> /var/log/power.log
 
@@ -39,7 +43,7 @@ if [[ $1 == false ]]; then
 	echo 0 > /sys/module/snd_hda_intel/parameters/power_save
 
 	# Restore screen brightness.
-	echo 14 > /sys/class/backlight/acpi_video0/brightness
+	echo $BRIGHTNESS_ON_AC > /sys/class/backlight/acpi_video0/brightness
 
 elif [[ $1 == true ]]; then
 	echo `date` "Switching to battery settings" >> /var/log/power.log
@@ -78,7 +82,7 @@ elif [[ $1 == true ]]; then
 	echo 1 > /sys/module/snd_hda_intel/parameters/power_save_controller
 
 	# Dim the screen.
-	echo 10 > /sys/class/backlight/acpi_video0/brightness
+	echo $BRIGHTNESS_ON_BATT > /sys/class/backlight/acpi_video0/brightness
 
 fi
 
